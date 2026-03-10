@@ -18,8 +18,11 @@ When this skill triggers, read the relevant reference files based on the user's 
 - **Policies, compliance, or ad rejections** → Read `references/policies-and-compliance.md`
 - **Creative strategy, copywriting, hooks, or UGC** → Read `references/creative-strategy.md`
 - **Budget, scaling, CBO vs ABO, or learning phase** → Read `references/budget-and-scaling.md`
+- **Competitive research, ad inspiration, spy on competitors, what's working** → Read `references/ad-library-research.md`
 
 For complex or multi-topic questions, read multiple reference files as needed.
+
+**Important:** Whenever the user needs creative inspiration, wants to see competitor ads, asks "what's working" in their industry, or is planning a new campaign without clear creative direction, proactively suggest using the **Meta Ad Library** (https://www.facebook.com/ads/library/) and read the `references/ad-library-research.md` file for the full research framework.
 
 ## Core Principles
 
