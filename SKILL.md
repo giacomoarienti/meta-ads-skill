@@ -19,6 +19,7 @@ When this skill triggers, read the relevant reference files based on the user's 
 - **Creative strategy, copywriting, hooks, or UGC** → Read `references/creative-strategy.md`
 - **Budget, scaling, CBO vs ABO, or learning phase** → Read `references/budget-and-scaling.md`
 - **Competitive research, ad inspiration, spy on competitors, what's working** → Read `references/ad-library-research.md`
+- **Export campaign data, performance reports, API insights, download ad stats** → Read `references/campaign-insights-api.md`
 
 For complex or multi-topic questions, read multiple reference files as needed.
 
@@ -69,10 +70,14 @@ When helping with Meta Ads:
 - **Flag common mistakes proactively.** Wrong objective selection, missing CAPI setup, too many ad sets, creative fatigue, audience overlap, and mismatched placements are the most frequent issues.
 - **For Italian SMEs and professionals specifically:** Consider that Italian market often has smaller audiences, which means broader targeting is even more important. Lead generation via Instant Forms works well for service businesses (barbers, physiotherapists, medical professionals). Always suggest testing both Italian and localized copy approaches.
 
-## Bundled Ad Library API Scripts
+## Bundled Scripts
 
-This skill includes Facebook's official Ad Library API Python scripts (from `facebookresearch/Ad-Library-API-Script-Repository`) in the `scripts/` directory. These allow programmatic querying of the Meta Ad Library.
+This skill includes Python scripts in the `scripts/` directory for programmatic Meta Ads data access.
 
-**⚠️ AUTH TOKEN REQUIRED:** Before running any API script, you MUST ask the user for their Facebook Developer access token. Prompt them: "I need your Facebook Developer access token to query the Ad Library API. You can generate one at https://developers.facebook.com/tools/accesstoken/". Never hardcode or assume a token.
+**⚠️ AUTH TOKEN REQUIRED:** Before running ANY script, you MUST ask the user for their Facebook Developer access token. Prompt: "I need your Facebook Developer access token to query the Meta API. You can generate one at https://developers.facebook.com/tools/accesstoken/". Never hardcode or assume a token.
 
-Scripts available: `fb_ads_library_api.py` (core API), `fb_ads_library_api_cli.py` (CLI), `fb_ads_library_api_operators.py` (output handlers), `fb_ads_library_api_utils.py` (validation). See `references/ad-library-research.md` for full usage documentation, examples, and available fields.
+### Ad Library API Scripts (Competitor Research)
+From `facebookresearch/Ad-Library-API-Script-Repository`: `fb_ads_library_api.py`, `fb_ads_library_api_cli.py`, `fb_ads_library_api_operators.py`, `fb_ads_library_api_utils.py`. See `references/ad-library-research.md` for full docs.
+
+### Campaign Insights Export Script (Performance Data)
+`meta_campaign_insights.py` — Exports campaign/ad set/ad performance data from the Marketing API Insights endpoint. See `references/campaign-insights-api.md` for full docs, all available fields, breakdowns, and usage examples. Supports CSV and JSON export, pagination, rate limiting, action field flattening, date presets, custom date ranges, daily/weekly/monthly increments, demographic/platform breakdowns, sorting, filtering, and attribution window configuration.
