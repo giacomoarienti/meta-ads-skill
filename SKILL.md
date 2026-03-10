@@ -68,3 +68,11 @@ When helping with Meta Ads:
 - **Reference current platform state.** Meta's platform changes frequently. Note Advantage+ as the current automation suite, ODAX as the current objective framework, and that CBO is now called "Advantage Campaign Budget."
 - **Flag common mistakes proactively.** Wrong objective selection, missing CAPI setup, too many ad sets, creative fatigue, audience overlap, and mismatched placements are the most frequent issues.
 - **For Italian SMEs and professionals specifically:** Consider that Italian market often has smaller audiences, which means broader targeting is even more important. Lead generation via Instant Forms works well for service businesses (barbers, physiotherapists, medical professionals). Always suggest testing both Italian and localized copy approaches.
+
+## Bundled Ad Library API Scripts
+
+This skill includes Facebook's official Ad Library API Python scripts (from `facebookresearch/Ad-Library-API-Script-Repository`) in the `scripts/` directory. These allow programmatic querying of the Meta Ad Library.
+
+**⚠️ AUTH TOKEN REQUIRED:** Before running any API script, you MUST ask the user for their Facebook Developer access token. Prompt them: "I need your Facebook Developer access token to query the Ad Library API. You can generate one at https://developers.facebook.com/tools/accesstoken/". Never hardcode or assume a token.
+
+Scripts available: `fb_ads_library_api.py` (core API), `fb_ads_library_api_cli.py` (CLI), `fb_ads_library_api_operators.py` (output handlers), `fb_ads_library_api_utils.py` (validation). See `references/ad-library-research.md` for full usage documentation, examples, and available fields.

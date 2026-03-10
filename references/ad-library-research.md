@@ -190,6 +190,128 @@ Important limitations to communicate to users:
 
 ## Tools That Enhance Ad Library Research
 
+### Built-in API Scripts (Bundled with This Skill)
+
+This skill includes Facebook's official Ad Library API Python scripts from `facebookresearch/Ad-Library-API-Script-Repository`. These scripts are located in the `scripts/` directory and allow programmatic access to the Ad Library data.
+
+**⚠️ IMPORTANT: Before using any script, you MUST ask the user for their Facebook Developer Access Token.** The token is required for all API calls. Ask:
+
+> "To query the Meta Ad Library API, I need your Facebook Developer access token. You can get one at https://developers.facebook.com/tools/accesstoken/. Please provide it so I can run the query."
+
+**Never hardcode or store the token.** Always receive it from the user at runtime.
+
+#### Requirements
+```bash
+pip install requests iso3166
+```
+
+#### Available Scripts
+
+**1. `scripts/fb_ads_library_api.py`** — Core API module
+- `FbAdsLibraryTraversal` class handles paginated API requests
+- Parameters: `access_token`, `fields`, `search_term`, `country`, `search_page_ids`, `ad_active_status`, `after_date`, `page_limit`, `api_version`
+- Handles retry logic and date filtering automatically
+- Returns a generator of ad archive batches
+
+**2. `scripts/fb_ads_library_api_cli.py`** — Command-line interface
+- Full CLI for querying the Ad Library API
+
+Usage examples:
+```bash
+# Count all active ads for a page in Italy
+python scripts/fb_ads_library_api_cli.py \
+  -t {ACCESS_TOKEN} \
+  -f 'page_id,page_name,ad_creative_bodies,ad_delivery_start_time,ad_snapshot_url' \
+  -c 'IT' \
+  --search-page-ids '{PAGE_ID}' \
+  --ad-active-status 'ACTIVE' \
+  -v count
+
+# Save competitor ads to CSV
+python scripts/fb_ads_library_api_cli.py \
+  -t {ACCESS_TOKEN} \
+  -f 'page_id,page_name,ad_creative_bodies,ad_creative_link_titles,ad_delivery_start_time,ad_delivery_stop_time,ad_snapshot_url,publisher_platforms,impressions,spend' \
+  -c 'IT' \
+  -s 'fisioterapista' \
+  --ad-active-status 'ALL' \
+  -v save_to_csv output.csv
+
+# Get ads started after a specific date
+python scripts/fb_ads_library_api_cli.py \
+  -t {ACCESS_TOKEN} \
+  -f 'page_name,ad_creative_bodies,ad_delivery_start_time,spend,impressions' \
+  -c 'IT' \
+  -s 'barbiere' \
+  --after-date '2025-01-01' \
+  -v save_to_csv barber_ads.csv
+
+# Track ad start date trends to CSV
+python scripts/fb_ads_library_api_cli.py \
+  -t {ACCESS_TOKEN} \
+  -f 'ad_delivery_start_time' \
+  -c 'IT' \
+  -s 'prenotazione online' \
+  -v start_time_trending trend_output.csv
+```
+
+**3. `scripts/fb_ads_library_api_operators.py`** — Output operators
+- `count` — Count total ads matching query
+- `save` — Save results as JSON lines file
+- `save_to_csv` — Save results as CSV (most useful for analysis)
+- `start_time_trending` — Output ad count by start date (spot campaign timing patterns)
+
+**4. `scripts/fb_ads_library_api_utils.py`** — Utilities
+- Country code validation (supports IT, US, GB, DE, FR, ES, and 26 other countries)
+- Field validation against the API's supported fields
+
+#### Available API Fields
+```
+id, page_id, page_name, ad_creation_time, ad_delivery_start_time,
+ad_delivery_stop_time, ad_creative_body, ad_creative_bodies,
+ad_creative_link_caption, ad_creative_link_captions,
+ad_creative_link_description, ad_creative_link_descriptions,
+ad_creative_link_title, ad_creative_link_titles, ad_snapshot_url,
+currency, delivery_by_region, demographic_distribution, bylines,
+impressions, languages, potential_reach, publisher_platforms,
+region_distribution, spend
+```
+
+#### Using the API Programmatically (Custom Scripts)
+
+When the user needs a custom analysis, you can write Python scripts that import from the bundled modules:
+
+```python
+import sys
+sys.path.insert(0, 'path/to/skill/scripts')
+from fb_ads_library_api import FbAdsLibraryTraversal
+
+# Initialize the API
+api = FbAdsLibraryTraversal(
+    access_token="USER_TOKEN_HERE",
+    fields="page_name,ad_creative_bodies,ad_delivery_start_time,spend,impressions",
+    search_term="your keyword",
+    country="IT",
+    ad_active_status="ACTIVE",
+    after_date="2025-01-01",
+    api_version="v21.0"  # Use latest API version
+)
+
+# Iterate through results
+for batch in api.generate_ad_archives():
+    for ad in batch:
+        print(ad["page_name"], ad.get("ad_creative_bodies", []))
+```
+
+#### Practical Use Cases for the API Scripts
+
+1. **Competitor audit:** Pull all active ads from a competitor's Page ID, export to CSV, analyze creative patterns and longevity
+2. **Industry keyword scan:** Search by keyword (e.g., "fisioterapista", "barbiere") to find all advertisers in a niche
+3. **Trend tracking:** Use `start_time_trending` to see when competitors launch campaigns (seasonal patterns)
+4. **Spend analysis (EU only):** Pull `spend` and `impressions` fields for EU ads to estimate competitor budgets
+5. **Creative library building:** Export `ad_snapshot_url` for all competitor ads to build a swipe file
+
+### Third-Party Tools
+
 For users who want to go beyond manual browsing:
 
 - **Foreplay / Swipekit:** Save ads from the Ad Library with one click, organize in swipe files
