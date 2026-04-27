@@ -1,49 +1,80 @@
 ---
 name: meta-ads-expert
-description: Expert Meta (Facebook/Instagram) advertising knowledge. Use whenever the user asks about Meta Ads, Facebook Ads, Instagram Ads, campaign creation, ad specs, creative strategy, audience targeting, Advantage+, budget optimization, Meta Pixel, CAPI, ad policies, placements, scaling, CBO vs ABO, ROAS, lead generation, retargeting, lookalike audiences, or any paid social on Meta. Also trigger for ad copy writing, creative review, campaign structures, performance diagnosis, targeting recommendations, and ad format specs. Trigger for indirect references like "run ads on Facebook", "Instagram campaign help", "my ads aren't performing", "what size should my images be", or "how to structure Meta campaigns". Covers all ad formats, all placements, all objectives, Advantage+ suite, tracking/measurement, and compliance policies.
+description: "Expert Meta (Facebook/Instagram) advertising knowledge. Use whenever the user asks about Meta Ads, Facebook Ads, Instagram Ads, campaign creation, ad specs, creative strategy, audience targeting, Advantage+, budget optimization, Meta Pixel, CAPI, ad policies, placements, scaling, CBO vs ABO, ROAS, lead generation, retargeting, lookalike audiences, or any paid social on Meta. Also trigger for ad copy writing, creative review, campaign structures, performance diagnosis, targeting recommendations, and ad format specs. Trigger for indirect references like 'run ads on Facebook', 'Instagram campaign help', 'my ads aren't performing', 'what size should my images be', or 'how to structure Meta campaigns'. Covers all ad formats, all placements, all objectives, Advantage+ suite, tracking/measurement, and compliance policies."
+user-invocable: true
+triggers:
+  - meta ads
+  - facebook ads
+  - instagram ads
+  - ad specs
+  - campaign structure
+  - audience targeting
+  - advantage+
+  - meta pixel
+  - CAPI
+  - ROAS
+  - ad creative
+  - ad budget
+  - ad library
+  - campaign insights
 ---
 
 # Meta Ads Expert
 
-You are an expert Meta Ads consultant with deep knowledge of every aspect of advertising on Facebook, Instagram, Messenger, and the Audience Network. Your knowledge is current as of early 2026 and covers all official Meta specifications, best practices, and platform changes.
+Provide expert Meta advertising guidance for Facebook, Instagram, Messenger, and Audience Network campaigns. Use when the user asks about campaign strategy, ad specs, creative best practices, audience targeting, tracking setup, budget optimization, competitor research, or performance analysis on Meta platforms.
 
-## How to Use This Skill
+## Reference Routing
 
-When this skill triggers, read the relevant reference files based on the user's question:
+Read the relevant reference files based on the user's question:
 
-- **Campaign strategy, objectives, or structure questions** → Read `references/strategy-and-objectives.md`
+- **Campaign strategy, objectives, or structure** → Read `references/strategy-and-objectives.md`
 - **Ad specs, formats, sizes, or creative requirements** → Read `references/specs-and-formats.md`
-- **Targeting, audiences, or Advantage+ questions** → Read `references/targeting-and-audiences.md`
+- **Targeting, audiences, or Advantage+** → Read `references/targeting-and-audiences.md`
 - **Tracking, Pixel, CAPI, attribution, or measurement** → Read `references/tracking-and-measurement.md`
 - **Policies, compliance, or ad rejections** → Read `references/policies-and-compliance.md`
 - **Creative strategy, copywriting, hooks, or UGC** → Read `references/creative-strategy.md`
 - **Budget, scaling, CBO vs ABO, or learning phase** → Read `references/budget-and-scaling.md`
-- **Competitive research, ad inspiration, spy on competitors, what's working** → Read `references/ad-library-research.md`
-- **Export campaign data, performance reports, API insights, download ad stats** → Read `references/campaign-insights-api.md`
+- **Competitive research or ad inspiration** → Read `references/ad-library-research.md`
+- **Export campaign data, performance reports, or API insights** → Read `references/campaign-insights-api.md`
 
-For complex or multi-topic questions, read multiple reference files as needed.
+For multi-topic questions, read multiple reference files. When the user needs creative inspiration or is planning without clear creative direction, proactively suggest the **Meta Ad Library** and read `references/ad-library-research.md`.
 
-**Important:** Whenever the user needs creative inspiration, wants to see competitor ads, asks "what's working" in their industry, or is planning a new campaign without clear creative direction, proactively suggest using the **Meta Ad Library** (https://www.facebook.com/ads/library/) and read the `references/ad-library-research.md` file for the full research framework.
+## Key Platform Thresholds
 
-## Core Principles
+These data-backed thresholds guide recommendations across all Meta Ads workflows:
 
-When advising on Meta Ads, always keep these fundamental principles in mind:
+- **Pixel + CAPI together** recovers 20–30% of lost conversion data — mandatory setup
+- **EMQ score ≥ 8.0** significantly improves ad delivery optimization
+- **Advantage+ campaigns** deliver ~22% higher ROAS with ≥ 50 conversions/week, 5–10 creative variants, and clean tracking
+- **96% of Facebook users** access via mobile — always default to vertical formats (4:5 Feed, 9:16 Stories/Reels)
+- **Learning phase** requires ~50 optimization events/week per ad set; avoid edits during this window
+- **6 ODAX objectives**: Awareness, Traffic, Engagement, Leads, App Promotion, Sales — mismatched objectives waste budget
 
-1. **Creative is the new targeting.** In 2025+, Meta's algorithm (Andromeda) is so advanced that manual audience definition matters less than the quality and relevance of your creative. Your images, video, and copy signal who your ideal customer is.
+## Campaign Creation Workflow
 
-2. **Feed the algorithm clean data.** Meta Pixel + Conversions API (CAPI) together is the mandatory setup. Server-side tracking recovers 20-30% of lost conversion data. Event Match Quality (EMQ) scores above 8.0 significantly improve ad delivery.
+Follow these steps when helping a user set up a new campaign:
 
-3. **Trust automation, but verify.** Advantage+ campaigns deliver ~22% higher ROAS on average, but they work best with sufficient conversion volume (50+/week), diverse creatives (5-10 variants), and clean tracking. Combine with manual campaigns for testing and niche targeting.
+1. **Clarify objective** — Map the user's goal to one of the 6 ODAX objectives. Ask about budget, timeline, and conversion history if not provided
+2. **Verify tracking** — Confirm Pixel + CAPI are installed. Check EMQ score (target ≥ 8.0). If tracking is missing, address this first (see `references/tracking-and-measurement.md`)
+3. **Choose structure** — Recommend Advantage+ Shopping if ≥ 50 weekly conversions; otherwise manual campaign with consolidated ad sets. Read `references/strategy-and-objectives.md` for detailed structure guidance
+4. **Build targeting** — Start broad with Advantage+ Audience for prospecting. Layer Custom/Lookalike Audiences for retargeting. Read `references/targeting-and-audiences.md`
+5. **Set creative specs** — Validate dimensions and file requirements against `references/specs-and-formats.md`. Require at least 3 creative variants
+6. **Configure budget** — Set CBO (Advantage Campaign Budget) for campaigns with ≥ 3 ad sets. Read `references/budget-and-scaling.md` for bid strategy guidance
+7. **Pre-launch review** — Check for policy violations (`references/policies-and-compliance.md`), confirm attribution window, verify all UTM parameters
 
-4. **Simplify campaign structure.** Fewer, well-structured campaigns outperform many fragmented ones. Consolidate ad sets, minimize changes during learning phase, and let the algorithm optimize with enough data.
+## Troubleshooting Workflow
 
-5. **Mobile-first, always.** 96% of Facebook users access via mobile. Use vertical formats (4:5 for Feed, 9:16 for Stories/Reels), large captions, and hook within the first 2-3 seconds.
+When a user reports declining performance or campaign issues:
 
-6. **The 6 ODAX Objectives:** Awareness, Traffic, Engagement, Leads, App Promotion, Sales. Each tells Meta what to optimize for. Mismatched objectives waste budget.
+1. **Check learning phase status** — Is the ad set exiting learning with < 50 events/week?
+2. **Evaluate creative fatigue** — Rising frequency + declining CTR signals exhausted creative
+3. **Verify tracking integrity** — Compare Pixel vs CAPI event counts; check EMQ score
+4. **Review audience overlap** — Use the Audience Overlap tool in Ads Manager across ad sets
+5. **Validate objective alignment** — Confirm the optimization event matches the actual business goal
+6. **Analyze budget distribution** — Check if CBO is starving high-potential ad sets
+7. **Export data for analysis** — Use `scripts/meta_campaign_insights.py` to pull detailed breakdowns
 
 ## Quick Reference: Universal Ad Specs
-
-These are the most commonly needed specs across all formats:
 
 | Element | Specification |
 |---|---|
@@ -60,24 +91,38 @@ These are the most commonly needed specs across all formats:
 | Max image file size | 30MB (keep under 1MB for speed) |
 | Max video file size | 4GB |
 
-## Responding to Users
+## Response Guidelines
 
-When helping with Meta Ads:
-
-- **Be specific and actionable.** Don't just say "use good creative" — specify formats, dimensions, hook timing, text overlay rules.
-- **Match advice to their context.** A small local business running €20/day needs different advice than an e-commerce brand spending €500/day. Ask about budget, goals, and current setup if not provided.
-- **Reference current platform state.** Meta's platform changes frequently. Note Advantage+ as the current automation suite, ODAX as the current objective framework, and that CBO is now called "Advantage Campaign Budget."
-- **Flag common mistakes proactively.** Wrong objective selection, missing CAPI setup, too many ad sets, creative fatigue, audience overlap, and mismatched placements are the most frequent issues.
-- **For Italian SMEs and professionals specifically:** Consider that Italian market often has smaller audiences, which means broader targeting is even more important. Lead generation via Instant Forms works well for service businesses (barbers, physiotherapists, medical professionals). Always suggest testing both Italian and localized copy approaches.
+- **Be specific and actionable** — provide exact formats, dimensions, hook timing, and text overlay rules rather than general advice
+- **Match advice to context** — a local business at €20/day needs different guidance than an e-commerce brand at €500/day. Ask about budget, goals, and current setup if not provided
+- **Reference current platform state** — Advantage+ is the current automation suite, ODAX is the objective framework, CBO is now "Advantage Campaign Budget"
+- **Flag common mistakes proactively** — wrong objective, missing CAPI, too many ad sets, creative fatigue, audience overlap, and placement mismatch
 
 ## Bundled Scripts
 
-This skill includes Python scripts in the `scripts/` directory for programmatic Meta Ads data access.
+**⚠️ AUTH TOKEN REQUIRED:** Before running any script, ask the user for their Facebook Developer access token. Prompt: "I need your Facebook Developer access token to query the Meta API. You can generate one at https://developers.facebook.com/tools/accesstoken/". Never hardcode or assume a token.
 
-**⚠️ AUTH TOKEN REQUIRED:** Before running ANY script, you MUST ask the user for their Facebook Developer access token. Prompt: "I need your Facebook Developer access token to query the Meta API. You can generate one at https://developers.facebook.com/tools/accesstoken/". Never hardcode or assume a token.
+### Ad Library API — Competitor Research
 
-### Ad Library API Scripts (Competitor Research)
-From `facebookresearch/Ad-Library-API-Script-Repository`: `fb_ads_library_api.py`, `fb_ads_library_api_cli.py`, `fb_ads_library_api_operators.py`, `fb_ads_library_api_utils.py`. See `references/ad-library-research.md` for full docs.
+Search any advertiser's active ads via Meta's Ad Library. Files: `scripts/fb_ads_library_api.py`, `fb_ads_library_api_cli.py`, `fb_ads_library_api_operators.py`, `fb_ads_library_api_utils.py`. See `references/ad-library-research.md` for full docs.
 
-### Campaign Insights Export Script (Performance Data)
-`meta_campaign_insights.py` — Exports campaign/ad set/ad performance data from the Marketing API Insights endpoint. See `references/campaign-insights-api.md` for full docs, all available fields, breakdowns, and usage examples. Supports CSV and JSON export, pagination, rate limiting, action field flattening, date presets, custom date ranges, daily/weekly/monthly increments, demographic/platform breakdowns, sorting, filtering, and attribution window configuration.
+```bash
+python scripts/fb_ads_library_api_cli.py \
+  --access-token "$TOKEN" \
+  --search-term "competitor name" \
+  --country US \
+  --ad-type ALL
+```
+
+### Campaign Insights — Performance Export
+
+Export campaign/ad set/ad performance data from the Marketing API. See `references/campaign-insights-api.md` for all fields, breakdowns, and options.
+
+```bash
+python scripts/meta_campaign_insights.py \
+  -t "$TOKEN" \
+  -a act_123456789 \
+  --date-preset last_30d \
+  --level campaign \
+  -o campaigns.csv
+```
